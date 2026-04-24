@@ -1,0 +1,12 @@
+{
+  "name": "node-ink-hello-world-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ink": "^5.0.1",
+    "react": "^18.2.0"
+  }
+}
