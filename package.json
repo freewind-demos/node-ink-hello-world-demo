@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "tsx index.tsx",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "ink": "^5.0.1",
     "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.23",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   }
 }

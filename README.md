@@ -17,13 +17,19 @@ pnpm install
 pnpm start
 ```
 
+类型检查：
+
+```bash
+pnpm typecheck
+```
+
 ## 概念讲解
 
 ### React 风格组件
 
 Ink 使用 React 组件来描述 UI，与 React DOM 类似但输出到终端：
 
-```javascript
+```tsx
 import { render, Text, Box } from "ink"
 import React from "react"
 
@@ -46,7 +52,7 @@ render(React.createElement(MyUI))
 
 使用 React 的 useState 管理状态：
 
-```javascript
+```tsx
 const [count, setCount] = useState(0)
 ```
 
@@ -54,31 +60,32 @@ const [count, setCount] = useState(0)
 
 用 `useInput` 处理键盘事件：
 
-```javascript
-useInput((input, key) => {
+```tsx
+useInput((_input, key) => {
   if (key.upArrow) setCount((c) => c + 1)
-  if (key.escape) process.exit(0)
+  if (key.escape) exit()
 })
 ```
 
 ## 完整示例
 
-```javascript
-import { render, Text, Box, useInput } from "ink"
-import React, { useState } from "react"
+```tsx
+import {Box, Text, render, useApp, useInput} from "ink"
+import {type FC, useState} from "react"
 
-const Counter = () => {
-  const [count, setCount] = useState(0)
+const Counter: FC = () => {
+  const [count, setCount] = useState<number>(0)
+  const {exit} = useApp()
 
-  useInput((input, key) => {
+  useInput((_input, key) => {
     if (key.upArrow) setCount((c) => c + 1)
     if (key.downArrow) setCount((c) => c - 1)
-    if (key.escape) process.exit(0)
+    if (key.escape) exit()
   })
 
   return (
     <Box flexDirection="column" alignItems="center">
-      <Text bold>{"\n"}🎮 Ink Counter Demo</Text>
+      <Text bold>{"\n"}Ink Counter Demo</Text>
       <Text dimColor>Press ↑↓ to change, Esc to exit</Text>
       <Text>{"\n"}</Text>
       <Box width={30} justifyContent="center">
@@ -93,7 +100,7 @@ const Counter = () => {
   )
 }
 
-render(React.createElement(Counter))
+render(<Counter />)
 ```
 
 ## 完整讲解
